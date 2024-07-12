@@ -1,0 +1,107 @@
+******************************************************************************************************************** 
+Q1: Analyze the time complexity of the following Java code and suggest a way to improve it:
+int sum = 0;
+for(int i = 1; i <= n; i++) {
+for(int j = 1; j <= i; j++) {
+sum++;
+}
+}
+********************************************************************************************************************
+Time complexity is O(n*i)
+IMPROVEMENT:
+
+public class SumOfNaturalNumbers {
+
+    // Recursive method to calculate the sum of first n natural numbers
+    public static int sumOfNaturalNumbers(int n) {
+        // Base case
+        if (n == 1) {
+            return 1;
+        }
+        // Recursive case
+        return n + sumOfNaturalNumbers(n - 1);
+    }
+
+    public static void main(String[] args) {
+        int n = 10; // You can change this value to test with other numbers
+        int sum = sumOfNaturalNumbers(n);
+        System.out.println("The sum of the first " + n + " natural numbers is: " + sum);
+    }
+}
+
+
+
+******************************************************************************************************************** 
+Q2 : Find the value of T(2) for the recurrence relation T(n) = 3T(n-1) + 12n, given that T(0) = 5.
+********************************************************************************************************************
+
+T(1) = 3T(0) + 12.1 
+T(1) = 3.5 + 12
+T(1) = 15 + 12
+T(1) = 27
+
+use T(1)to calculate T(2):
+
+T(2) = 3T(1) + 12.2
+T(2) = 3.7 + 12.2
+T(2) = 81 + 24
+T(2) = 105
+
+Therefore, the value of T(2) is 105
+
+********************************************************************************************************************
+ Q3 : Given a recurrence relation, solve it using a substitution method.
+Relation : T(n) = T(n - 1) + c
+********************************************************************************************************************
+
+T(n) = T(n-1) + c 
+T(n) = (T(n-2) + c) + c = T(n-2) + 2c 
+T(n) = (T(n-3) + c) + 2c = T(n-3) + 3c 
+T(n) = T(n-k) + kc 
+
+T(n) = T(n-n) + nc 
+ T(n) = T(0) + nc 
+
+For  n = 0 :
+ T(0) = T(0) 
+
+T(k) = T(0) + kc 
+
+T(k+1) = T(k) + c 
+
+T(k+1) = (T(0) + kc) + c 
+ T(k+1) = T(0) + (k+1)c 
+
+The solution of T(n) = T(n - 1) + c  with an initial condition  T(0) = T_0  is:
+ T(n) = T_0 + nc 
+Where  T_0  is the initial value  T(0).
+
+********************************************************************************************************************
+Q4: Given a recurrence relation:
+T(n) = 16T(n/4) + n2logn
+Find the time complexity of this relation using the master theorem.
+********************************************************************************************************************
+
+
+ T(n) = aT(\frac{n}{b}) + f(n) 
+
+From the given recurrence relation, we have:
+-  a = 16 
+-  b = 4 
+-  f(n) = n^2 \log n 
+
+1. If  f(n) = O(n^log_b a - ϵ})  for some ϵ > 0, then  T(n) = Θ(n^log_b a}) .
+2. If  f(n) = Θ(n^log_b a}) , then  T(n) = Θ(n^log_b a} \log n) .
+3. If  f(n) = Ω(n^log_b a + ϵ})  for some ϵ > 0, and if  af({n}{b}) kf(n)  for some  k < 1  and sufficiently large  n , then  T(n) = \Θ(f(n)) .
+log_b a = log_4 16 = log_4 (4^2) = 2 
+
+n^log_b a} = n^2 
+
+We have  f(n) = n^2 \log n . 
+
+To apply the Master Theorem, we compare  f(n)  to  n^2 :
+-  f(n) = n^2 \log n = \Θ(n^2 \log n) 
+
+This matches the second case of the Master Theorem because  f(n) = Θ(n^2 log n)  and  n^2 log n = Θ(n^log_b a log n) .
+
+the time complexity of the given recurrence relation is:   T(n) = \Θ(n^2 \log n) 
